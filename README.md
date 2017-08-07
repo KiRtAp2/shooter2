@@ -9,3 +9,5 @@ base_class.py contains class Base, which is used to make pretty much every other
 be inherited from. Method is_hit_by_objects(list_of_objects) is depreciated.
 
 I'll be updating this file when I find anything that's not clear.
+
+Editet by MihaMarkovi
