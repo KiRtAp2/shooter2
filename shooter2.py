@@ -113,7 +113,7 @@ def game_loop():
         char1.tick()
         char2.tick()
 
-        for b in clone(bullet_list):
+        for b in bullet_list:
             if char1.is_hit_by_object(b):
                 char2.score += 1
                 bullet_list.remove(b)
@@ -122,13 +122,13 @@ def game_loop():
                 char1.score += 1
                 bullet_list.remove(b)
 
-        for b in clone(bullet_list):
+        for b in bullet_list:
             if b.move(1):
                 bullet_list.remove(b)
             b.show(window)
 
-        for w in clone(wall_list):
-            for b in clone(bullet_list):
+        for w in wall_list:
+            for b in bullet_list:
                 if w.is_hit_by_object(b):
                     bullet_list.remove(b)
 
