@@ -7,8 +7,8 @@ import utils
 powerup_types = (
     #'null',
     #'speed',
-    'tripleshot',
-    #'bulletspeed',
+    #'tripleshot',
+    'bulletspeed',
     #'points',
     #'ignorewalls',
 )

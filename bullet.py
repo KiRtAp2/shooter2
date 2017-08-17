@@ -3,7 +3,6 @@ import base_class
 
 bullet_default_size_x = 8
 bullet_default_size_y = 4
-bullet_default_velocity = 15 # pixels/tick
 
 class Bullet(base_class.Base):
 
@@ -13,15 +12,15 @@ class Bullet(base_class.Base):
     #def show(self):
     # no need to overload
 
-    def __init__(self, direction, position):
+    def __init__(self, direction, position, velocity=constants.bullet_default_velocity):
         # direction:
         # 0 = moving to the left, owner=right
         # 1 = moving to the right, owner=left
         self.owner = direction
 
         if direction == 0:
-            self.dx = -bullet_default_velocity
+            self.dx = -velocity
         elif direction == 1:
-            self.dx = bullet_default_velocity
+            self.dx = velocity
 
         self.x, self.y = position

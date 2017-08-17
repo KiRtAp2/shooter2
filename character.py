@@ -55,6 +55,7 @@ class Character(base_class.Base):
         self.wall_timer -= 1
         if self.effect_durations["speed"] > -1: self.effect_durations["speed"] -= 1
         if self.effect_durations["tripleshot"] > -1: self.effect_durations["tripleshot"] -= 1
+        if self.effect_durations["bulletspeed"] > -1: self.effect_durations["bulletspeed"] -= 1
         if self.effect_durations["speed"] < 1 and self.current_move_speed==character_boosted_move_speed:
             self.unboost_speed()
 
@@ -76,16 +77,24 @@ class Character(base_class.Base):
             orientation = 1
         else:
             orientation = 0
+
+        vel_coeff = constants.bullet_default_velocity
+        if self.effect_durations["bulletspeed"] > -1:
+            vel_coeff = constants.bullet_boosted_velocity
+
+        bullets = [
+            bullet_class(orientation, pos, vel_coeff),
+        ]
+
         if self.effect_durations["tripleshot"]>-1:
-            bullets = (
-                bullet_class(orientation, pos),
-                bullet_class(orientation, (pos[0], pos[1]+40)),
-                bullet_class(orientation, (pos[0], pos[1]-40))
+            bullets.append(
+                bullet_class(orientation, (pos[0], pos[1]+40), vel_coeff)
             )
-            return bullets
-        else:
-            bullet = bullet_class(orientation, pos)
-            return (bullet,)
+            bullets.append(
+                bullet_class(orientation, (pos[0], pos[1] - 40), vel_coeff)
+            )
+
+        return bullets
 
     def boost_general(self, effect):
         self.effect_durations[effect] = default_effect_durations[effect]

@@ -25,3 +25,6 @@ font_size = 35
 framerate = 60
 
 distance_between_border_and_wall_cooldown_image_in_pixels = frame_width*0.1
+
+bullet_boosted_velocity = 30 # pixels/tick
+bullet_default_velocity = 15 # pixels/tick
