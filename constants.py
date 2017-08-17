@@ -13,9 +13,9 @@ scoretext_position_y = frame_height+(window_height-frame_height)*0.4
 unknown_object_size = (5,5)
 
 default_image = image("textures/orb_default.png")
-wall_image = image("textures/wall_default.png")
-wall_used_image = image("textures/wall_gray.png")
-wall_crossed = image("textures/wall_gray_crossed.png")
+wall_image = image("textures/wall/wall_default.png")
+wall_used_image = image("textures/wall/wall_gray.png")
+wall_crossed = image("textures/wall/wall_gray_crossed.png")
 logo_image = image("textures/logo.png")
 
 logo_image_dimensions = (800,300)

@@ -1,9 +1,18 @@
 import random
-
+from pygame.image import load as image
 import base_class
 import utils
 
-powerup_types = ('null', 'speed', 'tripleshot', 'bulletspeed', 'points')
+powerup_types = ('null', 'speed', 'tripleshot', 'bulletspeed', 'points', 'ignorewalls')
+
+powerup_textures = {
+    'null' : image("textures/powerup/null.png"),
+    'speed' : image("textures/powerup/speed.png"),
+    'tripleshot' : image("textures/powerup/tripleshot.png"),
+    'bulletspeed' : image("textures/powerup/ammospeed.png"),
+    'points' : image("textures/powerup/points.png"),
+    'ignorewalls' : image("textures/powerup/ignorewalls.png"),
+}
 
 class Powerup(base_class.Base):
 
@@ -35,3 +44,9 @@ class Powerup(base_class.Base):
             spawned_powerup = Powerup(x,y = pos, type=type)
 
         return spawned_powerup
+
+    def show(self, window):
+        try:
+            window.blit(powerup_textures[self.type], (self.x, self.y))
+        except KeyError:
+            super().show(window)
