@@ -8,8 +8,8 @@ powerup_types = (
     #'null',
     #'speed',
     #'tripleshot',
-    'bulletspeed',
-    #'points',
+    #'bulletspeed',
+    'points',
     #'ignorewalls',
 )
 

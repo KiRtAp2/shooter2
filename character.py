@@ -56,6 +56,7 @@ class Character(base_class.Base):
         if self.effect_durations["speed"] > -1: self.effect_durations["speed"] -= 1
         if self.effect_durations["tripleshot"] > -1: self.effect_durations["tripleshot"] -= 1
         if self.effect_durations["bulletspeed"] > -1: self.effect_durations["bulletspeed"] -= 1
+        if self.effect_durations["points"] > -1: self.effect_durations["points"] -= 1
         if self.effect_durations["speed"] < 1 and self.current_move_speed==character_boosted_move_speed:
             self.unboost_speed()
 
@@ -98,3 +99,8 @@ class Character(base_class.Base):
 
     def boost_general(self, effect):
         self.effect_durations[effect] = default_effect_durations[effect]
+
+
+    def score_multiplier(self):
+        if self.effect_durations["points"] > -1: return 2
+        else: return 1

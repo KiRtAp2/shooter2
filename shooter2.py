@@ -119,11 +119,11 @@ def game_loop():
 
         for b in bullet_list:
             if char1.is_hit_by_object(b):
-                char2.score += 1
+                char2.score += char2.score_multiplier()
                 bullet_list.remove(b)
 
             if char2.is_hit_by_object(b):
-                char1.score += 1
+                char1.score += char1.score_multiplier()
                 bullet_list.remove(b)
 
         for b in bullet_list:
