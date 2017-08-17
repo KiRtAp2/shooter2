@@ -1,6 +1,7 @@
 import random
 from pygame.image import load as image
 import base_class
+import constants
 import utils
 
 powerup_types = ('null', 'speed', 'tripleshot', 'bulletspeed', 'points', 'ignorewalls')
@@ -23,6 +24,8 @@ class Powerup(base_class.Base):
     # "blletspeed" = bullet speed buff
     # "points" = double points
     # "ignorewalls" = bullets ignore walls
+
+    time_remaining = constants.framerate*10 # ticks
 
     def __init__(self, x, y, type):
         self.x = x
@@ -51,3 +54,9 @@ class Powerup(base_class.Base):
             window.blit(powerup_textures[self.type], (self.x, self.y))
         except KeyError:
             super().show(window)
+
+    def tick(self):
+        """Returns true if it's time to destroy the object"""
+        self.time_remaining -= 1
+        if self.time_remaining <= 0:
+            return True
