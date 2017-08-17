@@ -10,8 +10,8 @@ bdist_msi_options = {
 
 setup(
 	name="Shooter",
-	version="2.0",
-	description="Shooter V2! Now with twice as much loneliness!",
+	version="2.1",
+	description="Shooter V2.1! Now with powerups which enhance your lonelyness",
 	author="KiRtApSquared",
 	options=dict(build_exe = buildOptions, bdist_msi=bdist_msi_options),
 	executables=[Executable(
