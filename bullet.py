@@ -15,8 +15,9 @@ class Bullet(base_class.Base):
 
     def __init__(self, direction, position):
         # direction:
-        # 0 = moving to the left
-        # 1 = moving to the right
+        # 0 = moving to the left, owner=right
+        # 1 = moving to the right, owner=left
+        self.owner = direction
 
         if direction == 0:
             self.dx = -bullet_default_velocity

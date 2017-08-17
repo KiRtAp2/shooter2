@@ -139,6 +139,10 @@ def game_loop():
                 wall_list.remove(w)
 
         for p in powerup_list:
+            for b in bullet_list:
+                if p.is_hit_by_object(b):
+                    powerup_list.remove(p)
+                    print("DEBUG: powerup hit by "+str(b.owner))
             p.show(window)
 
         pygame.draw.rect(window, colors.gray, (0, constants.frame_height,

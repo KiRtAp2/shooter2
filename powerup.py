@@ -22,6 +22,7 @@ class Powerup(base_class.Base):
     # "tripleshot" = triple shot
     # "blletspeed" = bullet speed buff
     # "points" = double points
+    # "ignorewalls" = bullets ignore walls
 
     def __init__(self, x, y, type):
         self.x = x
