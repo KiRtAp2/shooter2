@@ -3,6 +3,7 @@ import base_class
 
 character_default_move_speed = 5 # pixels/tick
 character_default_wall_cooldown = constants.framerate*15
+character_boosted_move_speed = 8 # pixels/tick
 
 
 class Character(base_class.Base):
@@ -10,6 +11,7 @@ class Character(base_class.Base):
     image = constants.default_image
     sx = sy = 49
     wall_timer = 0 #ticks/frames
+    current_move_speed = character_default_move_speed
 
     def __init__(self, pos):
 
@@ -28,6 +30,14 @@ class Character(base_class.Base):
 
         self.orientation = pos
 
+        self.effect_durations = {
+            "speed": -1,
+            "tripleshot": -1,
+            "bulletspeed": -1,
+            "points": -1,
+            "ignorewalls": -1,
+        }
+
     def show(self, window):
         window.blit(self.image, (self.x, self.y))
 
@@ -36,3 +46,19 @@ class Character(base_class.Base):
 
     def tick(self):
         self.wall_timer -= 1
+        if self.effect_durations["speed"] > -1: self.effect_durations["speed"] -= 1
+        if self.effect_durations["speed"] < 1 and self.current_move_speed==character_boosted_move_speed:
+            self.unboost_speed()
+
+    def start_movement(self, direction):
+        if direction == -1:
+            self.dy = -self.current_move_speed
+        if direction == 1:
+            self.dy = self.current_move_speed
+
+    def boost_speed(self):
+        self.current_move_speed = character_boosted_move_speed
+        self.effect_durations["speed"] = constants.framerate*10
+
+    def unboost_speed(self):
+        self.current_move_speed = character_default_move_speed

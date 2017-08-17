@@ -4,7 +4,14 @@ import base_class
 import constants
 import utils
 
-powerup_types = ('null', 'speed', 'tripleshot', 'bulletspeed', 'points', 'ignorewalls')
+powerup_types = (
+    #'null',
+    'speed',
+    #'tripleshot',
+    #'bulletspeed',
+    #'points',
+    #'ignorewalls',
+)
 
 powerup_textures = {
     'null' : image("textures/powerup/null.png"),

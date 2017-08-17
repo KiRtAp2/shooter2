@@ -78,13 +78,13 @@ def game_loop():
             if event.type == pygame.KEYDOWN:
 
                 if event.key == pygame.K_w:
-                    char1.dy = -character.character_default_move_speed
+                    char1.start_movement(-1)
                 if event.key == pygame.K_s:
-                    char1.dy = character.character_default_move_speed
+                    char1.start_movement(1)
                 if event.key == pygame.K_UP:
-                    char2.dy = -character.character_default_move_speed
+                    char2.start_movement(-1)
                 if event.key == pygame.K_DOWN:
-                    char2.dy = character.character_default_move_speed
+                    char2.start_movement(1)
 
                 if event.key == pygame.K_d:
                     bullet_list.append(bullet.Bullet(1, (char1.x+char1.sx+1, char1.y+char1.sy/2)))
@@ -142,9 +142,14 @@ def game_loop():
             for b in bullet_list:
                 if p.is_hit_by_object(b):
                     powerup_list.remove(p)
-            p.show(window)
+                    print(b.owner)
+                    if b.owner==0: # rigth
+                        char2.boost_speed()
+                    if b.owner==1: # left
+                        char1.boost_speed()
             if p.tick():
                 powerup_list.remove(p)
+            p.show(window)
 
         pygame.draw.rect(window, colors.gray, (0, constants.frame_height,
                                                constants.window_width,
