@@ -9,8 +9,8 @@ powerup_types = (
     #'speed',
     #'tripleshot',
     #'bulletspeed',
-    'points',
-    #'ignorewalls',
+    #'points',
+    'ignorewalls',
 )
 
 powerup_textures = {

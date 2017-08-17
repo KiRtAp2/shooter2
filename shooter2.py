@@ -133,7 +133,7 @@ def game_loop():
 
         for w in wall_list:
             for b in bullet_list:
-                if w.is_hit_by_object(b):
+                if w.is_hit_by_object(b) and not b.ignorewalls:
                     bullet_list.remove(b)
 
             w.show(window)

@@ -12,7 +12,7 @@ class Bullet(base_class.Base):
     #def show(self):
     # no need to overload
 
-    def __init__(self, direction, position, velocity=constants.bullet_default_velocity):
+    def __init__(self, direction, position, velocity=constants.bullet_default_velocity, ignorewalls=False):
         # direction:
         # 0 = moving to the left, owner=right
         # 1 = moving to the right, owner=left
@@ -24,3 +24,5 @@ class Bullet(base_class.Base):
             self.dx = velocity
 
         self.x, self.y = position
+
+        self.ignorewalls = ignorewalls

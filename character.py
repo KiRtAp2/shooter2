@@ -57,6 +57,7 @@ class Character(base_class.Base):
         if self.effect_durations["tripleshot"] > -1: self.effect_durations["tripleshot"] -= 1
         if self.effect_durations["bulletspeed"] > -1: self.effect_durations["bulletspeed"] -= 1
         if self.effect_durations["points"] > -1: self.effect_durations["points"] -= 1
+        if self.effect_durations["ignorewalls"] > -1: self.effect_durations["ignorewalls"] -= 1
         if self.effect_durations["speed"] < 1 and self.current_move_speed==character_boosted_move_speed:
             self.unboost_speed()
 
@@ -83,16 +84,20 @@ class Character(base_class.Base):
         if self.effect_durations["bulletspeed"] > -1:
             vel_coeff = constants.bullet_boosted_velocity
 
+        ignore_walls = False
+        if self.effect_durations["ignorewalls"] > -1:
+            ignore_walls = True
+
         bullets = [
-            bullet_class(orientation, pos, vel_coeff),
+            bullet_class(orientation, pos, vel_coeff, ignore_walls),
         ]
 
         if self.effect_durations["tripleshot"]>-1:
             bullets.append(
-                bullet_class(orientation, (pos[0], pos[1]+40), vel_coeff)
+                bullet_class(orientation, (pos[0], pos[1]+40), vel_coeff, ignore_walls)
             )
             bullets.append(
-                bullet_class(orientation, (pos[0], pos[1] - 40), vel_coeff)
+                bullet_class(orientation, (pos[0], pos[1] - 40), vel_coeff, ignore_walls)
             )
 
         return bullets
