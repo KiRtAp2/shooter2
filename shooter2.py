@@ -22,10 +22,12 @@ game_clock = pygame.time.Clock()
 
 bullet_list = []
 wall_list = []
-powerup_list = [powerup.Powerup.spawn()]
+powerup_list = []
 
 monospace_font = pygame.font.SysFont("monospace", constants.font_size)
 
+POWERUPSPAWN = pygame.USEREVENT+1
+pygame.time.set_timer(POWERUPSPAWN, constants.powerup_spawn_delay)
 
 def clone(x):
     a = x
@@ -98,13 +100,16 @@ def game_loop():
                 if event.key == pygame.K_LEFT:
                     build(char2)
 
-
             if event.type == pygame.KEYUP:
 
                 if event.key in (pygame.K_w, pygame.K_s):
                     char1.dy = 0
                 if event.key in (pygame.K_UP, pygame.K_DOWN):
                     char2.dy = 0
+
+            if event.type == POWERUPSPAWN:
+
+                powerup_list.append(powerup.Powerup.spawn())
 
         window.fill(colors.white)
 
