@@ -7,6 +7,7 @@ import colors
 import bullet
 import wall
 from sys import exit as quit
+import powerup
 
 pygame.init()
 
@@ -21,6 +22,7 @@ game_clock = pygame.time.Clock()
 
 bullet_list = []
 wall_list = []
+powerup_list = [powerup.Powerup.spawn()]
 
 monospace_font = pygame.font.SysFont("monospace", constants.font_size)
 
@@ -135,6 +137,9 @@ def game_loop():
             w.show(window)
             if w.tick():
                 wall_list.remove(w)
+
+        for p in powerup_list:
+            p.show(window)
 
         pygame.draw.rect(window, colors.gray, (0, constants.frame_height,
                                                constants.window_width,

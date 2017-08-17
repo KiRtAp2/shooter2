@@ -1,7 +1,7 @@
 from pygame.image import load as image
 
 window_width = 1200
-window_height = window_width/16*9
+window_height = window_width//16*9
 
 frame_width = window_width
 frame_height = window_height*0.8
