@@ -5,6 +5,13 @@ character_default_move_speed = 5 # pixels/tick
 character_default_wall_cooldown = constants.framerate*15
 character_boosted_move_speed = 8 # pixels/tick
 
+default_effect_durations = {
+    'speed' : 10*constants.framerate,
+    'tripleshot' : 10*constants.framerate,
+    'bulletspeed' : 10*constants.framerate,
+    'points' : 10*constants.framerate,
+    'ignorewalls' : 10*constants.framerate,
+}
 
 class Character(base_class.Base):
 
@@ -47,6 +54,7 @@ class Character(base_class.Base):
     def tick(self):
         self.wall_timer -= 1
         if self.effect_durations["speed"] > -1: self.effect_durations["speed"] -= 1
+        if self.effect_durations["tripleshot"] > -1: self.effect_durations["tripleshot"] -= 1
         if self.effect_durations["speed"] < 1 and self.current_move_speed==character_boosted_move_speed:
             self.unboost_speed()
 
@@ -62,3 +70,22 @@ class Character(base_class.Base):
 
     def unboost_speed(self):
         self.current_move_speed = character_default_move_speed
+
+    def shoot(self, bullet_class, pos):
+        if self.orientation == 0:
+            orientation = 1
+        else:
+            orientation = 0
+        if self.effect_durations["tripleshot"]>-1:
+            bullets = (
+                bullet_class(orientation, pos),
+                bullet_class(orientation, (pos[0], pos[1]+40)),
+                bullet_class(orientation, (pos[0], pos[1]-40))
+            )
+            return bullets
+        else:
+            bullet = bullet_class(orientation, pos)
+            return (bullet,)
+
+    def boost_general(self, effect):
+        self.effect_durations[effect] = default_effect_durations[effect]

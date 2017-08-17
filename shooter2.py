@@ -87,9 +87,11 @@ def game_loop():
                     char2.start_movement(1)
 
                 if event.key == pygame.K_d:
-                    bullet_list.append(bullet.Bullet(1, (char1.x+char1.sx+1, char1.y+char1.sy/2)))
+                    for b in char1.shoot(bullet.Bullet, (char1.x+char1.sx+1, char1.y+char1.sy/2)):
+                        bullet_list.append(b)
                 if event.key == pygame.K_RIGHT:
-                    bullet_list.append(bullet.Bullet(0, (char2.x-bullet.bullet_default_size_x, char2.y+char2.sy/2)))
+                    for b in char2.shoot(bullet.Bullet, (char2.x-bullet.bullet_default_size_x, char2.y+char2.sy/2)):
+                        bullet_list.append(b)
 
                 if event.key == pygame.K_a:
                     build(char1)
@@ -141,12 +143,13 @@ def game_loop():
         for p in powerup_list:
             for b in bullet_list:
                 if p.is_hit_by_object(b):
-                    powerup_list.remove(p)
-                    print(b.owner)
                     if b.owner==0: # rigth
-                        char2.boost_speed()
+                        if p.type=="speed": char2.boost_speed()
+                        else: char2.boost_general(p.type)
                     if b.owner==1: # left
-                        char1.boost_speed()
+                        if p.type=="speed": char1.boost_speed()
+                        else: char1.boost_general(p.type)
+                    powerup_list.remove(p)
             if p.tick():
                 powerup_list.remove(p)
             p.show(window)
